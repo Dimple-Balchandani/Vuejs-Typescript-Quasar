@@ -1,41 +1,49 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
+    <!-- Desktop Left Nav -->
     <q-drawer
-      v-model="leftDrawerOpen"
       show-if-above
       bordered
+      class="left-nav-bar bg-primary text-white q-pa-none q-mb-none hidden-xs"
+      :width="260"
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+      <div class="aspire-logo-section q-pa-lg q-mb-lg">
+        <img src="/src/assets/Aspire Logo.svg" alt="Aspire Logo" class="aspire-logo" />
+        <div class="tagline q-mt-md">
+          Trusted way of banking for 3,000+<br />SMEs and startups in Singapore
+        </div>
+      </div>
+      <q-list class="nav-list">
+        <q-item clickable v-ripple>
+          <q-item-section avatar
+            ><img src="/src/assets/Home.svg" alt="Home" class="nav-icon"
+          /></q-item-section>
+          <q-item-section>Home</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple active class="active-link">
+          <q-item-section avatar
+            ><img src="/src/assets/Card.svg" alt="Cards" class="nav-icon"
+          /></q-item-section>
+          <q-item-section>Cards</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple>
+          <q-item-section avatar
+            ><img src="/src/assets/Payments.svg" alt="Payments" class="nav-icon"
+          /></q-item-section>
+          <q-item-section>Payments</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple>
+          <q-item-section avatar
+            ><img src="/src/assets/Credit.svg" alt="Credit" class="nav-icon"
+          /></q-item-section>
+          <q-item-section>Credit</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple>
+          <q-item-section avatar
+            ><img src="/src/assets/Account.svg" alt="Settings" class="nav-icon"
+          /></q-item-section>
+          <q-item-section>Settings</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -46,57 +54,79 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
-
-const linksList: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
-
-const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
+// No script needed for static nav
 </script>
+
+<style scoped>
+.left-nav-bar {
+  background: #0b2a4a !important;
+  color: #fff;
+  border-right: 1px solid #e0e6ed;
+  min-height: 100vh;
+}
+.aspire-logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.aspire-logo {
+  width: 120px;
+  margin-bottom: 8px;
+}
+.tagline {
+  font-size: 0.95rem;
+  color: #6ec5b8;
+  line-height: 1.3;
+}
+.nav-list {
+  margin-top: 24px;
+}
+.nav-icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+.active-link {
+  background: #163e63 !important;
+  color: #6ec5b8 !important;
+  border-radius: 8px;
+}
+
+/* Mobile Styles */
+.mobile-top-bar {
+  background: #0b2a4a;
+  color: #fff;
+  width: 100vw;
+  min-height: 64px;
+  z-index: 10;
+}
+.mobile-aspire-logo {
+  width: 36px;
+  height: 36px;
+}
+.mobile-balance {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.balance-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+.mobile-new-card-btn {
+  font-size: 0.9rem;
+  min-width: 0;
+  padding: 0 8px;
+}
+.mobile-bottom-nav {
+  border-top: 1px solid #e0e6ed;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+  z-index: 20;
+}
+.mobile-bottom-tabs {
+  width: 100vw;
+  min-height: 56px;
+  font-size: 0.9rem;
+}
+</style>
