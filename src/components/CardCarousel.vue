@@ -1,27 +1,35 @@
 <template>
   <div class="card-carousel q-py-md">
     <div class="carousel-card-wrapper">
-      <q-carousel v-model="slide" :slides="cards.length" class="carousel-wrapper" animated>
-        <q-carousel-slide
-          v-for="(card, idx) in cards"
-          :key="card.id"
-          :name="idx"
-          class="flex flex-center"
-        >
-          <div class="card-outer-wrapper">
+      <div class="carousel-wrapper">
+        <button class="carousel-arrow left" @click="prevSlide" :disabled="slide === 0">&lt;</button>
+        <div class="carousel-slide">
+          <div
+            class="card-outer-wrapper"
+            v-for="(card, idx) in cards"
+            :key="card.id"
+            :style="slide === idx ? 'display: flex;' : 'display: none;'"
+          >
             <CardItem :card="card" @toggle-freeze="$emit('toggle-freeze', card.id)" />
           </div>
-        </q-carousel-slide>
-      </q-carousel>
+        </div>
+        <button
+          class="carousel-arrow right"
+          @click="nextSlide"
+          :disabled="slide === cards.length - 1"
+        >
+          &gt;
+        </button>
+      </div>
     </div>
     <div class="carousel-nav-bar">
-      <q-carousel-navigation
-        v-model="slide"
-        :max="cards.length"
-        type="flat"
-        color="positive"
-        class="carousel-dots custom-carousel-dots"
-      />
+      <span
+        v-for="(card, idx) in cards"
+        :key="card.id"
+        class="carousel-dot"
+        :class="{ active: slide === idx }"
+        @click="goToSlide(idx)"
+      ></span>
     </div>
     <div class="actions-bar q-mt-lg row justify-around items-center">
       <div class="action-btn" @click="emitAction('toggle-freeze')">
@@ -53,58 +61,66 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, watch, computed } from 'vue';
+<script lang="ts">
+import { defineComponent, ref, computed } from 'vue';
 import CardItem from './CardItem.vue';
 import type { Card } from './models';
 
-const props = defineProps<{ cards: Card[] }>();
-const emit = defineEmits<{
-  (e: 'toggle-freeze', id: number): void;
-  (e: 'set-spend-limit', id: number): void;
-  (e: 'add-to-gpay', id: number): void;
-  (e: 'replace-card', id: number): void;
-  (e: 'cancel-card', id: number): void;
-}>();
-
-const slide = ref(0);
-watch(
-  () => props.cards.length,
-  (len) => {
-    if (slide.value >= len) slide.value = 0;
+export default defineComponent({
+  components: {
+    CardItem,
   },
-);
+  props: {
+    cards: {
+      type: Array as () => Card[],
+      required: true,
+    },
+  },
+  emits: ['toggle-freeze', 'set-spend-limit', 'add-to-gpay', 'replace-card', 'cancel-card'],
+  setup(props, { emit }) {
+    const slide = ref(0);
+    const currentCard = computed(() => props.cards[slide.value]);
 
-const currentCard = computed(() => props.cards[slide.value]);
-
-// function prevSlide() {
-//   if (slide.value > 0) slide.value--;
-// }
-// function nextSlide() {
-//   if (slide.value < props.cards.length - 1) slide.value++;
-// }
-
-function emitAction(action: string) {
-  const card = currentCard.value;
-  if (!card) return;
-  switch (action) {
-    case 'toggle-freeze':
-      emit('toggle-freeze', card.id);
-      break;
-    case 'set-spend-limit':
-      emit('set-spend-limit', card.id);
-      break;
-    case 'add-to-gpay':
-      emit('add-to-gpay', card.id);
-      break;
-    case 'replace-card':
-      emit('replace-card', card.id);
-      break;
-    case 'cancel-card':
-      emit('cancel-card', card.id);
-      break;
-  }
-}
+    function prevSlide() {
+      if (slide.value > 0) slide.value--;
+    }
+    function nextSlide() {
+      if (slide.value < props.cards.length - 1) slide.value++;
+    }
+    function goToSlide(idx: number) {
+      slide.value = idx;
+    }
+    function emitAction(action: string) {
+      const card = currentCard.value;
+      if (!card) return;
+      switch (action) {
+        case 'toggle-freeze':
+          emit('toggle-freeze', card.id);
+          break;
+        case 'set-spend-limit':
+          emit('set-spend-limit', card.id);
+          break;
+        case 'add-to-gpay':
+          emit('add-to-gpay', card.id);
+          break;
+        case 'replace-card':
+          emit('replace-card', card.id);
+          break;
+        case 'cancel-card':
+          emit('cancel-card', card.id);
+          break;
+      }
+    }
+    return {
+      slide,
+      currentCard,
+      prevSlide,
+      nextSlide,
+      goToSlide,
+      emitAction,
+    };
+  },
+});
 </script>
 
 <style scoped lang="scss">
@@ -124,34 +140,67 @@ function emitAction(action: string) {
   flex-direction: column;
   align-items: center;
 }
-.card-outer-wrapper {
-  overflow: visible;
-  margin: 0 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
 .carousel-wrapper {
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
   background: transparent;
   overflow: visible;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.carousel-slide {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.carousel-arrow {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #23408e;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.carousel-arrow:disabled {
+  opacity: 0.2;
+  cursor: default;
 }
 .carousel-nav-bar {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin-top: 18px;
-  margin-bottom: 8px;
+  margin-top: 10px;
+  margin-bottom: 50px;
 }
-.carousel-dots {
+.carousel-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e6f9f0;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.carousel-dot.active {
+  border-radius: 8px;
+  width: 32px;
+  background: #00d054;
+}
+.card-outer-wrapper {
+  overflow: visible;
   margin: 0 8px;
-}
-.carousel-arrow {
-  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .actions-bar {
   width: 100%;
@@ -227,7 +276,7 @@ function emitAction(action: string) {
   .carousel-nav-bar {
     gap: 8px;
     margin-top: 10px;
-    margin-bottom: 4px;
+    margin-bottom: 50px;
   }
   .actions-bar {
     max-width: 100vw;

@@ -8,7 +8,13 @@
           <span class="balance-text q-ml-sm">3,000</span>
         </div>
       </div>
-      <q-btn color="primary" icon="add" label="New card" class="desktop-new-card-btn" />
+      <q-btn
+        color="primary"
+        icon="add"
+        label="New card"
+        class="desktop-new-card-btn"
+        @click="showAddModal = true"
+      />
     </div>
     <q-tabs
       v-model="tab"
@@ -80,14 +86,17 @@ import type { Card } from 'components/models';
 const cards = ref<Card[]>(CardService.getCards());
 const showAddModal = ref(false);
 const tab = ref('my');
-const cardDetailsOpen = ref(false);
+const cardDetailsOpen = ref(true);
 const transactionsOpen = ref(true);
 
 onMounted(() => {
   if (CardService.getCards().length === 0) {
-    CardService.addCard('Mark Henry');
-    CardService.addCard('Dimple');
-    cards.value = CardService.getCards();
+    CardService.addCard('Mark Henry'); // CardService will generate a unique id using Date.now()
+    // Wait a millisecond to ensure a unique id for the next card
+    setTimeout(() => {
+      CardService.addCard('Dimple');
+      cards.value = CardService.getCards();
+    }, 1);
   }
 });
 
@@ -186,5 +195,24 @@ function onToggleFreeze(cardId: number) {
   .rounded-borders {
     border-radius: 0 0 16px 16px;
   }
+}
+
+:deep(.custom-carousel-dots .q-carousel__navigation .q-btn) {
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  min-height: 12px;
+  margin: 0 6px;
+  background: #e6f9f0 !important;
+  box-shadow: none;
+  transition: all 0.2s;
+  padding: 0;
+}
+:deep(.custom-carousel-dots .q-carousel__navigation .q-btn--active) {
+  border-radius: 8px !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  background: #00d054 !important;
 }
 </style>
