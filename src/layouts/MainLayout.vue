@@ -4,7 +4,7 @@
     <q-drawer
       show-if-above
       bordered
-      class="left-nav-bar bg-primary text-white q-pa-none q-mb-none hidden-xs"
+      class="left-nav-bar text-white q-pa-none q-mb-none hidden-xs"
       :width="260"
     >
       <div class="aspire-logo-section q-pa-lg q-mb-lg">
@@ -57,9 +57,9 @@
 // No script needed for static nav
 </script>
 
-<style scoped>
+<style>
 .left-nav-bar {
-  background: #0b2a4a !important;
+  background: #0c365a !important;
   color: #fff;
   border-right: 1px solid #e0e6ed;
   min-height: 100vh;
@@ -74,7 +74,7 @@
   margin-bottom: 8px;
 }
 .tagline {
-  font-size: 0.95rem;
+  font-size: 12px;
   color: #6ec5b8;
   line-height: 1.3;
 }
@@ -90,43 +90,5 @@
   background: #163e63 !important;
   color: #6ec5b8 !important;
   border-radius: 8px;
-}
-
-/* Mobile Styles */
-.mobile-top-bar {
-  background: #0b2a4a;
-  color: #fff;
-  width: 100vw;
-  min-height: 64px;
-  z-index: 10;
-}
-.mobile-aspire-logo {
-  width: 36px;
-  height: 36px;
-}
-.mobile-balance {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.balance-text {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #fff;
-}
-.mobile-new-card-btn {
-  font-size: 0.9rem;
-  min-width: 0;
-  padding: 0 8px;
-}
-.mobile-bottom-nav {
-  border-top: 1px solid #e0e6ed;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
-  z-index: 20;
-}
-.mobile-bottom-tabs {
-  width: 100vw;
-  min-height: 56px;
-  font-size: 0.9rem;
 }
 </style>

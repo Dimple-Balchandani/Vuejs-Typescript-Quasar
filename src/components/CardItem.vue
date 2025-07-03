@@ -13,7 +13,10 @@
         <span v-if="showNumber" class="full-number">{{ card.number }}</span>
         <template v-else>
           <span class="dots">
-            <span v-for="n in 12" :key="n" class="dot">•</span>
+            <template v-for="group in 3">
+              <span v-for="n in 4" :key="`dot-${group}-${n}`" class="dot">•</span>
+              <span v-if="group < 3" :key="`space-${group}`">&nbsp;</span>
+            </template>
           </span>
           <span class="last4">{{ card.number.slice(-4) }}</span>
         </template>
@@ -120,15 +123,14 @@ function toggleShowNumber() {
 }
 .dots {
   display: flex;
-  gap: 4px;
 }
 .dot {
-  font-size: 16px;
-  margin-right: 2px;
+  font-size: 20px;
+  font-weight: 900;
   line-height: 1;
 }
 .last4 {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
   margin-left: 8px;
 }
@@ -141,7 +143,7 @@ function toggleShowNumber() {
 .card-details-row {
   position: absolute;
   left: 24px;
-  bottom: 20px;
+  bottom: 70px;
   display: flex;
   flex-direction: row;
   gap: 24px;
@@ -191,7 +193,7 @@ function toggleShowNumber() {
     gap: 2px;
   }
   .dot {
-    font-size: 7px;
+    font-size: 18px;
     margin-right: 1px;
   }
   .last4 {

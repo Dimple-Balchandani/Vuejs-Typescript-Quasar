@@ -37,15 +37,17 @@ describe('IndexPage', () => {
     // Find the freeze button and trigger a click
     const freezeBtn = wrapper.findAll('.action-btn')[0];
     expect(freezeBtn).toBeTruthy();
-    await freezeBtn.trigger('click');
-    await wrapper.vm.$nextTick();
-    const updated = CardService.getCards().find((c) => c.id === card?.id);
-    expect(updated?.frozen).toBe(true);
+    if (freezeBtn) {
+      await freezeBtn.trigger('click');
+      await wrapper.vm.$nextTick();
+      const updated = CardService.getCards().find((c) => c.id === card?.id);
+      expect(updated?.frozen).toBe(true);
 
-    // Now unfreeze by clicking the same button again
-    await freezeBtn.trigger('click');
-    await wrapper.vm.$nextTick();
-    const unfrozen = CardService.getCards().find((c) => c.id === card.id);
-    expect(unfrozen?.frozen).toBe(false);
+      // Now unfreeze by clicking the same button again
+      await freezeBtn.trigger('click');
+      await wrapper.vm.$nextTick();
+      const unfrozen = CardService.getCards().find((c) => c.id === card?.id);
+      expect(unfrozen?.frozen).toBe(false);
+    }
   });
 });

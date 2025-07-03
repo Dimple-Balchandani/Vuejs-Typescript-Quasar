@@ -26,7 +26,7 @@ describe('CardCarousel', () => {
     await freezeBtn?.trigger('click');
     const emitted = wrapper.emitted('toggle-freeze');
     expect(emitted).toBeTruthy();
-    if (emitted && emitted[0] && emitted[0][0] !== undefined) {
+    if (emitted && emitted[0] && emitted[0][0] !== undefined && cards[0]) {
       expect(emitted[0][0]).toBe(cards[0].id);
     }
   });

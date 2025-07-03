@@ -15,27 +15,12 @@
       </q-carousel>
     </div>
     <div class="carousel-nav-bar">
-      <q-btn
-        flat
-        round
-        icon="chevron_left"
-        @click="prevSlide"
-        :disable="slide === 0"
-        class="carousel-arrow"
-      />
       <q-carousel-navigation
         v-model="slide"
         :max="cards.length"
-        color="primary"
-        class="carousel-dots"
-      />
-      <q-btn
-        flat
-        round
-        icon="chevron_right"
-        @click="nextSlide"
-        :disable="slide === cards.length - 1"
-        class="carousel-arrow"
+        type="flat"
+        color="positive"
+        class="carousel-dots custom-carousel-dots"
       />
     </div>
     <div class="actions-bar q-mt-lg row justify-around items-center">
@@ -92,12 +77,12 @@ watch(
 
 const currentCard = computed(() => props.cards[slide.value]);
 
-function prevSlide() {
-  if (slide.value > 0) slide.value--;
-}
-function nextSlide() {
-  if (slide.value < props.cards.length - 1) slide.value++;
-}
+// function prevSlide() {
+//   if (slide.value > 0) slide.value--;
+// }
+// function nextSlide() {
+//   if (slide.value < props.cards.length - 1) slide.value++;
+// }
 
 function emitAction(action: string) {
   const card = currentCard.value;
@@ -205,6 +190,22 @@ function emitAction(action: string) {
   text-align: center;
   margin-top: 6px;
   line-height: 1.1;
+}
+
+.custom-carousel-dots .q-carousel__navigation .q-btn {
+  border-radius: 50%; /* default for dots */
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  background: #e6f9f0;
+  transition: all 0.2s;
+}
+
+.custom-carousel-dots .q-carousel__navigation .q-btn--active {
+  border-radius: 8px !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  background: #00d054 !important;
 }
 
 @media (max-width: 600px) {

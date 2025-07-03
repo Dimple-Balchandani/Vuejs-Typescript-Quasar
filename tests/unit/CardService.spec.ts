@@ -21,16 +21,23 @@ describe('CardService', () => {
     CardService.addCard('Dimple');
     const cards = CardService.getCards();
     expect(cards.length).toBe(2);
-    expect(cards[0].name).toBe('Mark Henry');
-    expect(cards[1].name).toBe('Dimple');
+    if (cards[0]) {
+      expect(cards[0].name).toBe('Mark Henry');
+    }
+    if (cards[1]) {
+      expect(cards[1].name).toBe('Dimple');
+    }
   });
 
   it('should add a new card', () => {
     CardService.addCard('Test User');
     const cards = CardService.getCards();
     expect(cards.length).toBe(1);
-    expect(cards[0].name).toBe('Test User');
-    expect(cards[0].number).toMatch(/\d{4} \d{4} \d{4} \d{4}/);
+    expect(cards[0]).toBeDefined();
+    if (cards[0]) {
+      expect(cards[0].name).toBe('Test User');
+      expect(cards[0].number).toMatch(/\d{4} \d{4} \d{4} \d{4}/);
+    }
   });
 
   it('should toggle freeze status', () => {

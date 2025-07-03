@@ -1,9 +1,12 @@
 <template>
   <q-page class="main-layout q-pa-lg">
     <div class="top-bar row items-center justify-between q-mb-lg">
-      <div class="balance-bar row items-center">
-        <q-avatar size="32px" color="green-4" text-color="white">S$</q-avatar>
-        <span class="balance-text q-ml-sm">3,000</span>
+      <div class="balance-bar column items-center">
+        <span class="balance-label">Available balance</span>
+        <div class="row">
+          <q-avatar size="32px" color="green-4" text-color="white">S$</q-avatar>
+          <span class="balance-text q-ml-sm">3,000</span>
+        </div>
       </div>
       <q-btn color="primary" icon="add" label="New card" class="desktop-new-card-btn" />
     </div>
@@ -99,18 +102,31 @@ function onToggleFreeze(cardId: number) {
 }
 </script>
 
-<style scoped>
+<style>
+.q-tabs__content {
+  justify-content: left !important;
+}
+
 .main-layout {
   max-width: 1200px;
   margin: 0 auto;
 }
 .top-bar {
   width: 100%;
+  margin-top: 16px;
+  padding: 0 16px;
 }
 .balance-bar {
   font-size: 1.3rem;
   font-weight: bold;
 }
+
+.balance-label {
+  font-size: 10px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
 .balance-text {
   font-size: 1.5rem;
   font-weight: 700;
