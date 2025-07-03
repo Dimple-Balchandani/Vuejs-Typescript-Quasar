@@ -27,6 +27,8 @@ npm run dev
 
 ## Deployed link
 
+https://dimple-aspireui.netlify.app/#/
+
 ## App Screenshot along with web vitals result:
 
 ![App Screenshot](src/assets/Screenshot.png)
