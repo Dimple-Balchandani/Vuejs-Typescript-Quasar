@@ -8,7 +8,7 @@
       :width="260"
     >
       <div class="aspire-logo-section q-pa-lg q-mb-lg">
-        <img src="/src/assets/Aspire Logo.svg" alt="Aspire Logo" class="aspire-logo" />
+        <img src="/assets/Aspire Logo.svg" alt="Aspire Logo" class="aspire-logo" />
         <div class="tagline q-mt-md">
           Trusted way of banking for 3,000+<br />SMEs and startups in Singapore
         </div>
@@ -16,31 +16,31 @@
       <q-list class="nav-list">
         <q-item clickable v-ripple>
           <q-item-section avatar
-            ><img src="/src/assets/Home.svg" alt="Home" class="nav-icon"
+            ><img src="/assets/Home.svg" alt="Home" class="nav-icon"
           /></q-item-section>
           <q-item-section>Home</q-item-section>
         </q-item>
         <q-item clickable v-ripple active class="active-link">
           <q-item-section avatar
-            ><img src="/src/assets/Card.svg" alt="Cards" class="nav-icon"
+            ><img src="/assets/Card.svg" alt="Cards" class="nav-icon"
           /></q-item-section>
           <q-item-section>Cards</q-item-section>
         </q-item>
         <q-item clickable v-ripple>
           <q-item-section avatar
-            ><img src="/src/assets/Payments.svg" alt="Payments" class="nav-icon"
+            ><img src="/assets/Payments.svg" alt="Payments" class="nav-icon"
           /></q-item-section>
           <q-item-section>Payments</q-item-section>
         </q-item>
         <q-item clickable v-ripple>
           <q-item-section avatar
-            ><img src="/src/assets/Credit.svg" alt="Credit" class="nav-icon"
+            ><img src="/assets/Credit.svg" alt="Credit" class="nav-icon"
           /></q-item-section>
           <q-item-section>Credit</q-item-section>
         </q-item>
         <q-item clickable v-ripple>
           <q-item-section avatar
-            ><img src="/src/assets/Account.svg" alt="Settings" class="nav-icon"
+            ><img src="/assets/Account.svg" alt="Settings" class="nav-icon"
           /></q-item-section>
           <q-item-section>Settings</q-item-section>
         </q-item>

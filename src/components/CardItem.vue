@@ -2,12 +2,12 @@
   <div class="aspire-card-outer">
     <div class="show-number-bar">
       <span class="show-number" @click="toggleShowNumber">
-        <img src="/src/assets/remove_red_eye-24px.svg" alt="Show" class="show-icon" />
+        <img src="/assets/remove_red_eye-24px.svg" alt="Show" class="show-icon" />
         Show card number
       </span>
     </div>
     <div class="aspire-card" :class="{ frozen: card.frozen }">
-      <img src="/src/assets/Aspire Logo-1.svg" alt="Aspire Logo" class="aspire-logo" />
+      <img src="/assets/Aspire Logo-1.svg" alt="Aspire Logo" class="aspire-logo" />
       <div class="card-name">{{ card.name }}</div>
       <div class="card-number-row">
         <span v-if="showNumber" class="full-number">{{ card.number }}</span>
@@ -25,7 +25,7 @@
         <span>Thru: {{ card.expiry }}</span>
         <span class="cvv">CVV: ***</span>
       </div>
-      <img src="/src/assets/Visa Logo.svg" alt="VISA" class="visa-logo" />
+      <img src="/assets/Visa Logo.svg" alt="VISA" class="visa-logo" />
     </div>
   </div>
 </template>

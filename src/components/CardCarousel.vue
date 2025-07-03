@@ -33,7 +33,7 @@
     </div>
     <div class="actions-bar q-mt-lg row justify-around items-center">
       <div class="action-btn" @click="emitAction('toggle-freeze')">
-        <div class="icon-btn"><img src="/src/assets/Freeze card.svg" alt="Freeze card" /></div>
+        <div class="icon-btn"><img src="/assets/Freeze card.svg" alt="Freeze card" /></div>
         <div class="action-label">
           <span v-if="currentCard?.frozen">Unfreeze<br />card</span>
           <span v-else>Freeze<br />card</span>
@@ -41,20 +41,20 @@
       </div>
       <div class="action-btn" @click="emitAction('set-spend-limit')">
         <div class="icon-btn">
-          <img src="/src/assets/Set spend limit.svg" alt="Set spend limit" />
+          <img src="/assets/Set spend limit.svg" alt="Set spend limit" />
         </div>
         <div class="action-label">Set spend<br />limit</div>
       </div>
       <div class="action-btn" @click="emitAction('add-to-gpay')">
-        <div class="icon-btn"><img src="/src/assets/GPay.svg" alt="Add to GPay" /></div>
+        <div class="icon-btn"><img src="/assets/GPay.svg" alt="Add to GPay" /></div>
         <div class="action-label">Add to<br />GPay</div>
       </div>
       <div class="action-btn" @click="emitAction('replace-card')">
-        <div class="icon-btn"><img src="/src/assets/Replace card.svg" alt="Replace card" /></div>
+        <div class="icon-btn"><img src="/assets/Replace card.svg" alt="Replace card" /></div>
         <div class="action-label">Replace<br />card</div>
       </div>
       <div class="action-btn" @click="emitAction('cancel-card')">
-        <div class="icon-btn"><img src="/src/assets/Deactivate card.svg" alt="Cancel card" /></div>
+        <div class="icon-btn"><img src="/assets/Deactivate card.svg" alt="Cancel card" /></div>
         <div class="action-label">Cancel<br />card</div>
       </div>
     </div>
