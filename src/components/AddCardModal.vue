@@ -6,18 +6,11 @@
       </q-card-section>
       <q-form @submit.prevent="submit">
         <q-card-section>
-          <q-input
-            v-model="name"
-            label="Card Name"
-            :rules="[(val) => !!val || 'Name is required']"
-            autofocus
-            dense
-            filled
-          />
+          <q-input v-model="name" label="Card Name" :rules="nameRules" autofocus dense filled />
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="Cancel" color="primary" v-close-popup @click="close" />
-          <q-btn label="Add" color="primary" type="submit" :disable="!name" />
+          <q-btn label="Add" color="primary" type="submit" :disable="!isFormValid" />
         </q-card-actions>
       </q-form>
     </q-card>
@@ -25,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void;
@@ -48,8 +41,17 @@ function close() {
   name.value = '';
 }
 
+const nameRules = [
+  (val: string) => !!val || 'Name is required',
+  (val: string) => (val && val.length >= 3) || 'Name must be at least 3 characters',
+  (val: string) =>
+    /^[\w\s-]+$/.test(val) || 'Name can only contain letters, numbers, spaces, or hyphens',
+];
+
+const isFormValid = computed(() => nameRules.every((rule) => rule(name.value) === true));
+
 function submit() {
-  if (name.value) {
+  if (isFormValid.value) {
     emit('add-card', name.value.trim());
     close();
   }

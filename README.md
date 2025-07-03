@@ -3,38 +3,30 @@
 Aspire UI project
 
 ## Install the dependencies
+
 ```bash
-yarn
-# or
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+## Run on local
+
 ```bash
-quasar dev
+npm run dev
 ```
 
+## Technologies used
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
+| Technology | Description                         |
+| ---------- | ----------------------------------- |
+| Vue.js 3   | Progressive JavaScript framework    |
+| Vite       | Fast frontend build tool            |
+| TypeScript | Typed superset of JavaScript        |
+| Quasar     | Vue.js UI framework for SPA/SSR/PWA |
+| SCSS       | CSS preprocessor for styling        |
+| Vitest     | Unit testing framework              |
 
+## Deployed link
 
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
+## App Screenshot along with web vitals result:
 
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+![App Screenshot](src/assets/Screenshot.png)
